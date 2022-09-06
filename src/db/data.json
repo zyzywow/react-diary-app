@@ -1,0 +1,32 @@
+{
+  "diary": [
+    {
+      "id": 1,
+      "writer": "최종윤",
+      "contents": "날씨도 화창하다.",
+      "emotion": 1,
+      "date": 48487
+    },
+    {
+      "id": 2,
+      "writer": "장동건",
+      "contents": "날씨도 화창하다.",
+      "emotion": 2,
+      "date": 77767
+    },
+    {
+      "id": 3,
+      "writer": "정우성",
+      "contents": "날씨도 화창하다.",
+      "emotion": 3,
+      "date": 121213
+    },
+    {
+      "id": 4,
+      "writer": "유재석",
+      "contents": "날씨도 화창하다.",
+      "emotion": 4,
+      "date": 15445454
+    }
+  ]
+}
