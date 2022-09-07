@@ -2,289 +2,253 @@
 @import "mixin";
 
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 body {
   font-family: "Roboto", "Noto Sans KR", sans-serif;
   font-size: 16px;
   color: #111;
-  background-image: repeating-linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.05),
-    rgba(255, 255, 255, 0.05) 1px,
-    0,
-    transparent 50px
-  );
+  // prettier-ignore
+  background-image: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05), 
+                                                     rgba(255, 255, 255, 0.05) 1px, 
+                                                       0, transparent 50px);
   background-color: #333;
 }
 a {
   color: inherit;
   text-decoration: none;
 }
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-button {
-  cursor: pointer;
-}
+
 li {
   list-style: none;
 }
-$red: rgb(253, 47, 47);
-$blue: rgb(0, 3, 170);
+
+$red: rgb(218, 15, 15);
+$blue: rgb(15, 103, 218);
 
 #header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 60px;
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  // position: fixed;
   position: relative;
   z-index: 99;
+  overflow: hidden;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
   h1 {
-    font-weight: 700;
     font-size: 18px;
-    @include longShadow(#ccc, 50);
+    font-weight: 700;
     text-transform: uppercase;
+    @include longShadow(#ccc, 50);
     strong {
       font-weight: 700;
+    }
+  }
+}
+
+.checkBox {
+  display: inline-block;
+  margin-right: 20px;
+  vertical-align: middle;
+  input {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+    padding: 0;
+    border: 0;
+  }
+  input:checked ~ .label:before {
+    content: "\e5ca";
+    font-family: "Material Icons";
+    color: #fff;
+    border: none;
+    font-weight: bold;
+    background-color: lighten($blue, 10);
+
+    @include longShadow($blue, 10);
+  }
+  .label {
+    display: flex;
+    align-items: center;
+    user-select: none;
+    &:before {
+      content: "\e5ca";
+      width: 25px;
+      height: 25px;
+      overflow: hidden;
+      margin-right: 6px;
+      font-family: "Material Icons";
+      color: darken(#f8f8f8, 30);
+      border: 1px solid darken(#f8f8f8, 20);
+      font-weight: bold;
+      border-radius: 5px;
+      box-sizing: border-box;
+      background-color: #f8f8f8;
+      @include longShadow(darken(#f8f8f8, 10), 10);
     }
   }
 }
 
 .container {
-  width: 1400px;
-  margin: 100px auto;
+  width: 800px;
+  margin: 50px auto;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 0 20px;
+  &:focus {
+    outline-color: $red;
+  }
+}
+textarea {
+  margin-top: 30px;
+  height: 200px;
+  resize: none;
+  padding: 20px;
+}
+.section {
+  margin-bottom: 20px;
+  text-align: left;
   color: #fff;
-
-  .title {
-    text-transform: uppercase;
-    font-size: 36px;
-    font-weight: 300;
-    margin-bottom: 50px;
-    strong {
-      font-weight: 700;
-    }
-  }
-  .movieList {
-    display: flex;
-    flex-wrap: wrap;
-    li {
-      display: flex;
-      width: calc(50% - 20px);
-      margin: 150px 10px 0 10px;
-      padding: 30px;
-      background-color: rgba(0, 0, 0, 0.2);
-      border-radius: 0 20px 0 20px;
-      text-align: left;
-      position: relative;
-      a {
-        width: 100%;
-        display: flex;
-        // justify-content: space-between;
-      }
-      .img {
-        margin-top: -100px;
-        position: relative;
-        .point {
-          position: absolute;
-          bottom: 20px;
-          left: 20px;
-          width: 50px;
-          height: 50px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background-color: #000;
-          color: #fff;
-          border-radius: 100%;
-        }
-      }
-      .info {
-        margin-left: 30px;
-
-        .titleBox {
-          margin-bottom: 20px;
-          h3 {
-            font-size: 24px;
-            margin-bottom: 20px;
-          }
-          .originalTitle {
-            font-size: 18px;
-          }
-          .release {
-            opacity: 0.5;
-            margin-top: 20px;
-          }
-        }
-      }
-
-      .overview {
-        @include multiEllipsis(1.5, 3);
-      }
-      .vote {
-        position: absolute;
-        right: 20px;
-        top: 20px;
-        padding: 15px;
-        background-color: #000;
-        color: #fff;
-        border-radius: 5px;
-        font-size: 14px;
-      }
-    }
-  }
 }
-
-.detail {
-  .detailBox {
-    display: flex;
-    justify-content: space-between;
-    .img {
-      width: 300px;
-      img {
-        border-radius: 0 50px 0 50px;
-        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
-        border: 10px solid #fff;
-      }
-    }
-    .info {
-      background-color: #fff;
-      border-radius: 50px 0 50px 0;
-      box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
-      color: #111;
-      flex-grow: 1;
-      margin-left: 50px;
-      padding: 30px;
-      text-align: left;
-      overflow: hidden;
-      .titleBox {
-        padding-bottom: 20px;
-        margin-bottom: 20px;
-        border-bottom: 1px solid #999;
-        h3 {
-          font-size: 24px;
-        }
-        .originalTitle {
-          margin: 10px 0;
-        }
-      }
-      .summary {
-        dl {
-          // display: flex;
-          margin-bottom: 10px;
-          padding-bottom: 10px;
-          border-bottom: 1px dotted #ccc;
-          align-items: center;
-
-          dd {
-            font-weight: 500;
-            font-size: 20px;
-            margin-top: 10px;
-          }
-          .genre {
-            span {
-              display: inline-block;
-              &:last-child:after {
-                display: none;
-              }
-            }
-            span:after {
-              content: "/";
-              display: inline-block;
-              margin: 0 5px;
-            }
-          }
-        }
-      }
-    }
-  }
-  .profileList {
-    display: flex;
-    overflow: hidden;
-    width: 100%;
-
-    .item {
-      display: flex;
-      flex-direction: column;
-      // margin: 0 5px;
-      width: 100px;
-      img {
-        width: 80px;
-        height: 120px;
-        object-fit: cover;
-      }
-      span {
-        font-size: 12px;
-        margin-top: 10px;
-      }
-    }
-  }
-  .bg {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    left: 0;
-    top: 0;
-    background-position: 50%;
-    background-size: cover;
-    &:before {
-      content: "";
-      display: block;
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-  }
-  .back {
-    padding: 20px 30px;
-    background-color: #111;
-    color: #fff;
-    font-size: 18px;
-    border-radius: 10px 0 10px 0;
-  }
+label {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #fff;
+  display: block;
 }
-
-#search {
-  position: absolute;
-  right: 20px;
+.btns {
   display: flex;
-  input {
-    height: 40px;
-    padding: 10px;
-    border-radius: 5px;
-    margin-right: 10px;
-    outline: none;
-    border: 1px solid #ccc;
-    min-width: 300px;
-  }
-  a {
-    background-color: #111;
+  justify-content: center;
+  margin-top: 50px;
+  .btn {
+    padding: 20px 50px;
     color: #fff;
+    border-radius: 100px;
+    background-color: $blue;
+    border: none;
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 0 20px;
-    border-radius: 5px;
-    text-transform: uppercase;
-    font-size: 14px;
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 700;
+    overflow: hidden;
+    @include longShadow(darken($blue, 10), 40);
+  }
+}
+.contents {
+  text-align: left;
+}
+
+.diaryItem {
+  textarea {
+    height: 100px;
+  }
+}
+
+.infoBox {
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  margin: 20px auto;
+  padding: 20px;
+  width: 800px;
+  dl {
+    display: flex;
+    align-items: center;
+    dd {
+      margin-left: 5px;
+      transform: translateY(2px);
+    }
+  }
+}
+.diaryList {
+  .titleBox {
+    color: #fff;
+    margin: 50px 0;
+    padding-top: 50px;
+    border-top: 1px dashed #fff;
+    h2 {
+      font-size: 32px;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .total {
+      text-align: right;
+    }
+  }
+  .list {
+    li {
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      .info {
+        display: flex;
+        position: relative;
+      }
+      dl {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+        max-width: 350px;
+        dt {
+          font-weight: 500;
+          color: rgb(43, 78, 255);
+        }
+        dd {
+          margin-left: 10px;
+          color: #fff;
+          @include ellipsis;
+        }
+      }
+      .btns {
+        position: absolute;
+        right: 0;
+        top: 0;
+        margin-top: -5px;
+        .btn {
+          border-radius: 5px;
+          padding: 5px;
+          margin-left: 5px;
+        }
+        .confirm {
+          background-color: $red;
+          @include longShadow(darken($red, 10), 30);
+        }
+      }
+      .contents {
+        margin-top: 20px;
+        font-weight: 500;
+        font-size: 18px;
+        padding-top: 20px;
+        border-top: 1px dashed #d9d9d9;
+        white-space: pre-wrap;
+      }
+    }
   }
 }
 #footer {
   display: flex;
   justify-content: center;
   margin-top: 100px;
-
+  margin-bottom: 50px;
   p {
     padding: 15px 30px;
     background-color: #fff;
@@ -294,12 +258,5 @@ $blue: rgb(0, 3, 170);
     strong {
       font-weight: 900;
     }
-  }
-}
-
-@media all and (max-width: 1200px) {
-  .container {
-    width: 100%;
-    padding: 0 20px;
   }
 }

@@ -9,13 +9,10 @@ export default function DiaryEditor({ insertDiary }) {
 
   const [diaryItem, setDiaryItem] = useState({
     writer: "가나다",
-    contents: "내용이 들어갑니다.",
+    contents: "내용이 들어갑니다......",
     emotion: 1,
   });
   const insertDiaryItem = function () {
-    // console.log(diaryItem.writer);
-    // console.log(diaryItem.contents);
-    // console.log(diaryItem.emotion);
     if (diaryItem.writer.length < 3) {
       alert("글쓴이는 최소 3글자 이상이어야 합니다.");
       writerRef.current.focus();
@@ -23,6 +20,7 @@ export default function DiaryEditor({ insertDiary }) {
     } else if (diaryItem.contents.length < 10) {
       alert("내용은 최소 10글자 이상이어야 합니다.");
       contentsRef.current.focus();
+      return false;
     }
     // 자식이 부모에게 데이터 전달하는 방법..
     insertDiary(diaryItem.writer, diaryItem.contents, diaryItem.emotion);
@@ -57,45 +55,24 @@ export default function DiaryEditor({ insertDiary }) {
       [e.target.name]: e.target.value,
     });
   };
-  const testObj = { name: "장동건", age: "30", weight: "90" };
-  console.log(testObj);
-  // console.log(testObj["name"]);
+  // const testObj = { name: "장동건", age: "30", weight: "90" };
+  // console.log(testObj);
+  // // console.log(testObj["name"]);
 
-  const spreadObj = { ...testObj };
-  console.log(spreadObj);
+  // const spreadObj = { ...testObj };
+  // console.log(spreadObj);
 
   return (
     <div className="container">
       <div className="section">
-        <input
-          type="text"
-          value={diaryItem.writer}
-          name="writer"
-          placeholder="이름을 입력해주세요."
-          onChange={changeDiaryItem}
-          ref={writerRef}
-        />
+        <input type="text" value={diaryItem.writer} name="writer" placeholder="이름을 입력해주세요." onChange={changeDiaryItem} ref={writerRef} />
       </div>
       <div className="contents section">
-        <textarea
-          name="contents"
-          id=""
-          cols="30"
-          rows="10"
-          value={diaryItem.contents}
-          onChange={changeDiaryItem}
-          ref={contentsRef}
-          placeholder="내용을 입력해주세요."
-        ></textarea>
+        <textarea name="contents" id="" cols="30" rows="10" value={diaryItem.contents} onChange={changeDiaryItem} ref={contentsRef} placeholder="내용을 입력해주세요."></textarea>
       </div>
       <div className="section">
         <label>오늘 하루 어땠나요?</label>
-        <select
-          name="emotion"
-          id=""
-          value={diaryItem.emotion}
-          onChange={changeDiaryItem}
-        >
+        <select name="emotion" id="" value={diaryItem.emotion} onChange={changeDiaryItem}>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -104,7 +81,7 @@ export default function DiaryEditor({ insertDiary }) {
         </select>
         {/* <label>
           <span>좋아요</span>
-          <input type="radio" name="emotion" value="1" id="" checked />
+          <input type="radio" name="emotion" value="1" id="" />
           <span>나빠요</span>
           <input type="radio" name="emotion" value="2" id="" />
           <span>슬퍼요</span>
